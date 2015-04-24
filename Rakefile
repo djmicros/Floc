@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Tracknwin::Application.load_tasks
+Floc::Application.load_tasks
