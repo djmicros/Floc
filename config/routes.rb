@@ -1,6 +1,7 @@
 Floc::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :locations
   
   root to: 'static_pages#home'
   
@@ -12,6 +13,15 @@ Floc::Application.routes.draw do
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
+  
+  match '/location/new',  to: 'locations#new'
+  match '/location/:id',  to: 'locations#show'
+  match '/location',  to: 'locations#index'
+
+  match '/users/:id/locations', to: 'locations#user_locations'
+
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

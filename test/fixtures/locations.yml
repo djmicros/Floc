@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  desc: MyText
+  geo: MyString
+  electricity: false
+  open: false
+  public: false
+  user: 
+
+two:
+  name: MyString
+  desc: MyText
+  geo: MyString
+  electricity: false
+  open: false
+  public: false
+  user: 

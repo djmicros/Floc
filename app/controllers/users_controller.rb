@@ -47,7 +47,6 @@ class UsersController < ApplicationController
   end
   
   
-  
   private
 
     def signed_in_user

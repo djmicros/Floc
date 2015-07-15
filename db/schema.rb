@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150424132644) do
+ActiveRecord::Schema.define(:version => 20150715120420) do
+
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.text     "desc"
+    t.string   "geo"
+    t.boolean  "electricity"
+    t.boolean  "open"
+    t.boolean  "public"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "locations", ["user_id"], :name => "index_locations_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
