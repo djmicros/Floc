@@ -3,8 +3,12 @@
   <aside class="span4">
     <section>
       <h1>
-        <%= @location.name %>
+        <%#= @location.photos.first.photo.url %>
       </h1>
+	  Photos:
+	  <% @location.photos.each do |pic| %>
+		<%= image_tag pic.photo.url %>
+	  <% end %>
 	  user:
 	  <%= @location.user.name %>
     </section>

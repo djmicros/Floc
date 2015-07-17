@@ -11,12 +11,19 @@ class LocationsController < ApplicationController
   
   def show
     @location = Location.find(params[:id])
+	@photos = @location.photos
   end
   
   def create
     @location = Location.new(params[:location])
 	@location.user = current_user
 	if @location.save
+	      if params[:photos]
+        params[:photos].each { |image|
+          @location.photos.create(photo: image)
+        }
+      end
+	  
       flash[:success] = "Location saved"
       redirect_to @location
     else
