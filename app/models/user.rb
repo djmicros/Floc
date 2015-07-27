@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :name, :email, :password, :password_confirmation, :country, :webpage
   has_secure_password
   has_many :locations, dependent: :destroy
 
@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true
   validates_confirmation_of :password
+  validates :country, presence: true
   
   private
 
