@@ -5,12 +5,16 @@
       <h1>
         <%#= @location.photos.first.photo.url %>
       </h1>
-	  Photos:
-	  <% @location.photos.each do |pic| %>
-		<%= image_tag pic.photo.url %>
-	  <% end %>
-	  user:
-	  <%= @location.user.name %>
+		Photos:
+		<% @location.photos.each do |pic| %>
+			<%= image_tag pic.photo.url %>
+		<% end %>
+	  </br>
+		Tags:
+		<%= raw @location.tag_list.map { |t| link_to t, tag_path(t)}.join(', ')%>
+	  </br>
+		User:
+		<%= @location.user.name %>
     </section>
   </aside>
 </div>

@@ -2,7 +2,11 @@ class LocationsController < ApplicationController
 
  
   def index
+	if params[:tag]
+		@locations = Location.tagged_with(params[:tag]).paginate(page: params[:page])
+	else
     @locations = Location.paginate(page: params[:page])
+	end
   end
   
   def new
