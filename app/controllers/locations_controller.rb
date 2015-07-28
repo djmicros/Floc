@@ -2,11 +2,15 @@ class LocationsController < ApplicationController
 
  
   def index
-	if params[:tag]
-		@locations = Location.tagged_with(params[:tag]).paginate(page: params[:page])
-	else
+
+  if params[:search_tag].present? 
+      @locations = Location.tagged_with(params[:search_tag]).paginate(page: params[:page])
+      if params[:search_near].present?
+        @locations = @locations.near(params[:search_near], 10, :order => :distance)
+      end
+  else
     @locations = Location.paginate(page: params[:page])
-	end
+  end
   end
   
   def new

@@ -15,6 +15,15 @@
 	  </br>
 		User:
 		<%= @location.user.name %>
+		<%= @location.latitude %>
+		<%= @location.longitude %>
+	  </br>
+		<h4>Nearby:</h4>
+			<ul>
+			<% for location in @location.nearbys(5) %>
+				<li><%= link_to location.name, location %> (<%=location.distance.round(2) %> miles)</li>
+			<% end %>
+			</ul>
     </section>
   </aside>
 </div>

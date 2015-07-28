@@ -3,7 +3,7 @@ Floc::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :locations
   
-  get 'tags/:tag', to: 'locations#index', as: :tag
+  get 'tags/:search_tag', to: 'locations#index', as: :search_tag
   root to: 'static_pages#home'
   
   

@@ -1,6 +1,14 @@
 <% provide(:title, 'All locations') %>
 <h1>All locations</h1>
 
+<%= form_tag locations_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search_tag, params[:search_tag] %>
+    <%= text_field_tag :search_near, params[:search_near] %>
+    <%= submit_tag "Search Near", :name => nil %>
+  </p>
+<% end %>
+
 <%= will_paginate %>
 
 <ul class="locations">
