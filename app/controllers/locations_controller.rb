@@ -19,7 +19,18 @@ class LocationsController < ApplicationController
   
   def show
     @location = Location.find(params[:id])
-	@photos = @location.photos
+
+
+
+    @hash = Gmaps4rails.build_markers(@location) do |location, marker|
+        marker.lat location.latitude
+        marker.lng location.longitude
+        marker.picture({
+           "url" => "/images/map_pin.png",
+           "width" =>  40,
+           "height" => 55})
+        marker.infowindow location.geo + ".  " + location.desc
+    end
   end
   
   def create
