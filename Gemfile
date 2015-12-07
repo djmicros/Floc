@@ -29,6 +29,8 @@ gem 'gmaps4rails'
 
 gem 'sqlite3'
 
+gem 'rails-erd'
+gem 'ruby-graphviz'
 
 # Gems used only for assets and not required
 # in production environments by default.

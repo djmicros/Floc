@@ -5,7 +5,18 @@
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>
-      </h1>
-    </section>
+	  </h1>
+	</section>
+	</br>
+	Contact page: <%= link_to(@user.webpage.to_s, "http://#{@user.webpage.to_s}", :target => "_blank") %>
+	</br>  
+	  <%= link_to "Show all locations (" + @user.locations.count.to_s + ")", :controller => :locations, :action => :user_locations %> 
   </aside>
 </div>
+
+<div>
+<h3> <%= @user.name %>'s recent locations: </h3>
+<ul class="locations">
+  <% @locations = @user.locations.limit(3) %>
+  <%= render @locations %>
+</ul>

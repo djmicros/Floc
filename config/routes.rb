@@ -22,7 +22,7 @@ Floc::Application.routes.draw do
   match '/location/:id',  to: 'locations#show'
   match '/location',  to: 'locations#index'
 
-  match '/users/:id/locations', to: 'locations#user_locations'
+  match '/users/:id/locations', to: 'locations#user_locations', as: :user_locations
 
 
 
