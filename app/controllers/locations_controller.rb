@@ -56,8 +56,14 @@ class LocationsController < ApplicationController
   
   def update
     @location = Location.find(params[:id])
-    if @location.update_attributes(params[:user])
-      flash[:success] = "Location updated"
+    if @location.update_attributes(params[:location])
+		  if params[:photos]
+		params[:photos].each { |image|
+          @location.photos.create(photo: image)
+        }
+      end
+	  
+      flash[:success] = "Location saved"
       redirect_to @location
     else
       render 'edit'
@@ -65,12 +71,18 @@ class LocationsController < ApplicationController
   end
   
   def destroy
-    Location.find(params[:id]).destroy
-    flash[:success] = "Location destroyed."
-    redirect_to users_url
+    @location = Location.find(params[:id])
+		if @location.user == current_user
+			@location.destroy
+			flash[:success] = "Location destroyed."
+			redirect_to locations_url
+		else
+			flash[:warning] = "It's not your location!"
+			redirect_to @location
+		end
   end
   
-    def user_locations
+  def user_locations
 	@id = :id
 	@user = User.find(params[:id])
     @locations = @user.locations.paginate(:page => params[:page], :per_page => 30)

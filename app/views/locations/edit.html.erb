@@ -1,0 +1,41 @@
+<% provide(:title, 'Edit location') %>
+<h1>Edit location</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for @location, :html => { :class => 'form-horizontal', multipart: true } do |f| %>
+	      <%= render 'shared/location_messages' %>
+		  
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :desc %>
+      <%= f.text_area :desc %>
+
+      <%= f.label :geo %>
+      <%= f.text_field :geo %>
+	  
+      <%= f.label :tag_list, "Tags (separated by commas)" %>
+      <%= f.text_field :tag_list %>
+
+	  <%= f.label "Electricity?" %>
+      <%= f.check_box :electricity %> <br />
+	  
+	  <%= f.label "Open?" %>
+      <%= f.check_box :open %> <br />
+	  
+	  <%= f.label "Public?" %>
+      <%= f.check_box :public %> <br />
+	  
+
+
+
+	  <%= file_field_tag "photos[]", type: :file, multiple: true %>
+
+
+
+
+      <%= f.submit "Update location", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

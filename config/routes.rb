@@ -9,7 +9,7 @@ Floc::Application.routes.draw do
   get 'tags/:search_tag', to: 'locations#index', as: :search_tag
   get 'tags/:tag', to: 'locations#index', as: :tag
   
-  
+
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
@@ -20,6 +20,10 @@ Floc::Application.routes.draw do
   
   match '/location/new',  to: 'locations#new'
   match '/location/:id',  to: 'locations#show'
+
+  get '/location/:id/edit', to: 'locations#edit'
+  get '/location/:id/delete', to: 'locations#destroy'
+  
   match '/location',  to: 'locations#index'
 
   match '/users/:id/locations', to: 'locations#user_locations', as: :user_locations

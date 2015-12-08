@@ -151,6 +151,8 @@ input, textarea, select, .uneditable-input {
   @include box_sizing;
 }
 
+
+
 input {
   height: auto !important;
 }
@@ -228,4 +230,11 @@ input {
 
 .carousel-inner>.active {
     height: 400px;
+}
+
+
+#search_tag, #search_near {
+  border: 1px solid #bbb;
+  margin-bottom: -30px;
+  @include box_sizing;
 }
