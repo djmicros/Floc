@@ -3,8 +3,8 @@
 
 <%= form_tag locations_path, :method => :get do %>
   <p>
-    <%= text_field_tag :search_tag, params[:search_tag] %>
-    <%= text_field_tag :search_near, params[:search_near] %>
+    <%= text_field_tag :search_tag, params[:search_tag], placeholder: 'Search tag...' %>
+    <%= text_field_tag :search_near, params[:search_near], placeholder: 'Search near...' %>
     <%= submit_tag "Search Near", :name => nil %>
   </p>
 <% end %>
