@@ -3,14 +3,18 @@ class LocationsController < ApplicationController
  
   def index
 
-  if params[:search_tag].present? 
-      @locations = Location.tagged_with(params[:search_tag]).paginate(page: params[:page])
-      if params[:search_near].present?
-        @locations = @locations.near(params[:search_near], 10, :order => :distance)
-      end
-  else
-    @locations = Location.paginate(page: params[:page])
-  end
+    if params[:search_tag].present? || params[:search_near].present? 
+        if params[:search_tag].present?
+          @locations = Location.tagged_with(params[:search_tag]).paginate(page: params[:page])
+  	    else 
+          @locations = Location.paginate(page: params[:page])
+  	    end
+        if params[:search_near].present?
+          @locations = @locations.near(params[:search_near], 10, :order => :distance)
+        end
+    else
+        @locations = Location.paginate(page: params[:page])
+    end
   end
   
   def new
@@ -19,9 +23,6 @@ class LocationsController < ApplicationController
   
   def show
     @location = Location.find(params[:id])
-
-
-
     @hash = Gmaps4rails.build_markers(@location) do |location, marker|
         marker.lat location.latitude
         marker.lng location.longitude
