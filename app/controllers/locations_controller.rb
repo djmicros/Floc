@@ -5,7 +5,7 @@ class LocationsController < ApplicationController
 
     if params[:search_tag].present? || params[:search_near].present? 
         if params[:search_tag].present?
-          @locations = Location.tagged_with(params[:search_tag]).paginate(page: params[:page])
+          @locations = Location.where('public = ?', true).tagged_with(params[:search_tag]).paginate(page: params[:page])
   	    else 
           @locations = Location.paginate(page: params[:page])
   	    end
@@ -13,7 +13,7 @@ class LocationsController < ApplicationController
           @locations = @locations.near(params[:search_near], 10, :order => :distance)
         end
     else
-        @locations = Location.paginate(page: params[:page])
+        @locations = Location.where('public = ?', true).paginate(page: params[:page])
     end
   end
   
@@ -84,9 +84,12 @@ class LocationsController < ApplicationController
   end
   
   def user_locations
-	@id = :id
-	@user = User.find(params[:id])
-    @locations = @user.locations.paginate(:page => params[:page], :per_page => 30)
+    @user = User.find(params[:id])   
+    if @user == current_user
+      @locations = @user.locations.paginate(page: params[:page])
+    else
+      @locations = Location.where('public = ? AND user_id = ?', true, params[:id]).paginate(page: params[:page])
+    end
   end
   
   
