@@ -1,8 +1,10 @@
 <tr>
 	<td>
 		  	<% if location.public %> 
+		  		<%= image_tag(location.photos.first.photo.url, :class => 'location-thumbnail') %>
 		  		<%= link_to location.name, location %> 
 		  	<% else %> 
+
 		  		<%= link_to location.name + " - Private", location, class: 'label-warning' %> 
 		  	<% end %>
 	</td>
