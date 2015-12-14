@@ -16,7 +16,8 @@
 
 <div>
 <h3> <%= @user.name %>'s recent locations: </h3>
-<ul class="locations">
+<table class="table table-striped">
   <% @locations = @user.locations.limit(3) %>
   <%= render @locations %>
-</ul>
+</table>
+
