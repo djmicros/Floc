@@ -244,3 +244,17 @@ input {
 }
 
 
+#thumb-preview{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:5px;
+  display:none;
+  color:#fff;
+  }
+
+#thumb-preview img {
+  width: 300px;
+  height: auto;
+}
+
