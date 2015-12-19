@@ -29,7 +29,7 @@
 			this.t = this.title;
 			this.title = "";	
 			var c = (this.t != "") ? "<br/>" + this.t : "";
-			$("body").append("<p id='thumb-preview'><img src='"+ this.href +"' alt='Image preview' />"+ c +"</p>");								 
+			$("body").append("<p id='thumb-preview'><img src='"+ this.firstChild.getAttribute("src") +"' alt='Image preview' />"+ c +"</p>");								 
 			$("#thumb-preview")
 				.css("top",(e.pageY - xOffset) + "px")
 				.css("left",(e.pageX + yOffset) + "px")

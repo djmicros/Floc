@@ -1,5 +1,6 @@
 class LocationsController < ApplicationController
-
+before_filter :signed_in_user, only: [:index, :show, :edit, :new, :create, :update]
+before_filter :correct_user,   only: [:edit, :update]
  
   def index
 
@@ -91,7 +92,24 @@ class LocationsController < ApplicationController
       @locations = Location.where('public = ? AND user_id = ?', true, params[:id]).paginate(page: params[:page])
     end
   end
+
+  private
+
+    def signed_in_user
+      unless signed_in?
+        store_location
+        redirect_to signin_url, notice: "Please sign in."
+      end
+    end
   
+  def correct_user
+      @user = Location.find(params[:id]).user
+      redirect_to(root_path) unless current_user?(@user)
+    end
+  
+  def admin_user
+      redirect_to(root_path) unless current_user.admin?
+    end
   
   
   
