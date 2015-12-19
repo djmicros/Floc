@@ -1,12 +1,17 @@
 <tr>
 	<td class="location">
-		  	<% if location.public %> 
-		  		<%= link_to image_tag(location.photos.first.photo.url, :class => 'location-thumbnail'), location, :id => location.photos.first.photo.url, :class => 'location-thumbnail-preview' %>
+			<% if location.public %>
+		  		<% if location.photos.empty? %> 
+		  			<%= link_to image_tag("/images/noimage.jpg", :class => 'location-thumbnail'), location, :id => "/images/noimage.jpg", :class => 'no-thumbnail-preview' %>
+		  		<% else %>
+		  			<%= link_to image_tag(location.photos.first.photo.url, :class => 'location-thumbnail'), location, :id => location.photos.first.photo.url, :class => 'location-thumbnail-preview' %>
+		  		<% end %>
 		  		<%= link_to location.name, location %> 
-		  	<% else %> 
-
+		  	<% else %>
+		  		<%= link_to image_tag("/images/private.jpg", :class => 'location-thumbnail'), location, :id => "/images/private.jpg", :class => 'private-thumbnail-preview' %>
 		  		<%= link_to location.name + " - Private", location, class: 'label-warning' %> 
 		  	<% end %>
+
 	</td>
 	<td class="location">
 			<% if location.user == current_user %>
