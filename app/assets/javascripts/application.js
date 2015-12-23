@@ -15,6 +15,7 @@
 //= require jquery.min
 //= require jquery_ujs
 //= require jquery.lightbox.min
+//= require jquery.filer
 //= require bootstrap.min
 //= require underscore
 //= require gmaps/google

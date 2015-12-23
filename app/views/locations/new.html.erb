@@ -30,7 +30,7 @@
 
 
 
-	  <%= file_field_tag "photos[]", type: :file, multiple: true %>
+	  <%= file_field_tag "photos[]", type: :file, multiple: true, :id => 'filer_input' %>
 
 
 
@@ -39,3 +39,17 @@
     <% end %>
   </div>
 </div>
+
+
+<script>  
+  $(document).ready(function() {
+       $('#filer_input').filer({
+    limit: 6,
+    maxSize: 2,
+    extensions: ['jpg', 'jpeg', 'png', 'gif'],
+    changeInput: true,
+    showThumbs: true,
+    addMore: true
+});      
+  });
+</script>

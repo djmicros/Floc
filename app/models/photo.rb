@@ -11,4 +11,6 @@ class Photo < ActiveRecord::Base
 
   #do_not_validate_attachment_file_type :photo
   validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
+	validates_attachment_file_name :photo, matches: [/png\Z/, /jpe?g\Z/]
+
 end

@@ -11,6 +11,8 @@
  *= require_self
  *= require bootstrap.min
  *= require jquery.lightbox
+ *= require jquery.filer
+ *= require jquery-filer
  *= require_tree .
  */
 

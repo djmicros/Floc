@@ -16,4 +16,6 @@ class Location < ActiveRecord::Base
   validates :desc, presence: true, length: { maximum: 200 }
   validates :geo, presence: true, uniqueness: true
 
+
+
 end
