@@ -93,6 +93,19 @@ before_filter :correct_user,   only: [:edit, :update]
     end
   end
 
+  def delete_photo
+    @location = Location.find(params[:id])
+        if @location.user == current_user
+                @photo = Photo.find(params[:photo_id])
+                @photo.destroy
+                flash[:success] = "Photo deleted!"
+                redirect_to edit_location_path(@location)
+        else
+                flash[:warning] = "It's not your location!"
+                redirect_to locations_url
+        end
+  end
+
   private
 
     def signed_in_user

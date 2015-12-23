@@ -262,3 +262,18 @@ input {
   height: 80px;
 }
 
+.edit-photo-item {
+  float: left;
+  position: relative; 
+  width: 150px;
+}
+
+.edit-photo-item p { 
+  position: absolute; 
+  left: 0; 
+  top: 0; 
+  width: 100%;
+  text-align: center;
+  color: #FFF; 
+  background-color: #ff4136;
+}

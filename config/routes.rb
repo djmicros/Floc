@@ -24,6 +24,8 @@ Floc::Application.routes.draw do
   get '/location/:id/edit', to: 'locations#edit'
   get '/location/:id/delete', to: 'locations#destroy'
   
+  get '/photo/:id/delete', to: 'locations#delete_photo'
+	
   match '/location',  to: 'locations#index'
 
   match '/users/:id/locations', to: 'locations#user_locations', as: :user_locations

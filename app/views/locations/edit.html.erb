@@ -33,6 +33,17 @@
     <%= file_field_tag "photos[]", type: :file, multiple: true, :id => 'filer_input' %>
 
 
+<div class="edit-photo">                       
+              <% if @location.photos.any? %>         
+                  <% @location.photos.each do |pic| %>
+                    <div class="edit-photo-item">
+                      <%= link_to(image_tag(pic.photo.url, :width => '150px'), {:controller => :locations, :action => :delete_photo, :photo_id => pic.id}, :class => 'edit-photo-thumbnail', :confirm => "Are you sure you want to delete this photo?") %>
+                      <p class="edit-photo-caption">DELETE</p>
+                    </div>
+                  <% end %>
+              <% end %>
+</div>
+
 
 
       <%= f.submit "Update location", class: "btn btn-large btn-primary" %>
