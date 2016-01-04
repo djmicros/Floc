@@ -14,6 +14,16 @@
 
       <%= f.label :geo %>
       <%= f.text_field :geo %>
+
+    <input id="pac-input" class="controls" type="text"
+
+        placeholder="Enter address">
+
+      <div id="myLocation" class="btn btn-small btn-info">Find my location</div>
+
+      <p id="demo"></p>
+
+      <div id="map" style="width: 600px; height: 400px"></div> 
 	  
       <%= f.label :tag_list, "Tags (separated by commas)" %>
       <%= f.text_field :tag_list %>
@@ -41,6 +51,7 @@
 </div>
 
 
+
 <script>  
   $(document).ready(function() {
        $('#filer_input').filer({
@@ -53,3 +64,97 @@
 });      
   });
 </script>
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAj1VhTA5l4MKf9AloiQ81JkHvjXMedSI4&signed_in=true&libraries=places&callback=initMap" async defer></script>
+
+<script type="text/javascript"> 
+  var map = null;
+  var marker = null;
+  var x = document.getElementById("demo");
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 50.0646, lng: 19.9449},
+    zoom: 5
+  });
+  var input = /** @type {!HTMLInputElement} */(
+      document.getElementById('pac-input'));
+
+  var types = document.getElementById('type-selector');
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+  var autocomplete = new google.maps.places.Autocomplete(input);
+  autocomplete.bindTo('bounds', map);
+
+  var infowindow = new google.maps.InfoWindow();
+  var marker = new google.maps.Marker({
+    map: map,
+    anchorPoint: new google.maps.Point(0, -29)
+  });
+
+  autocomplete.addListener('place_changed', function() {
+    infowindow.close();
+    marker.setVisible(false);
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+      window.alert("Autocomplete's returned place contains no geometry");
+      return;
+    }
+    var latLng = place.geometry.location;
+
+    marker.setPosition(latLng);
+    marker.setVisible(true);
+
+    var address = '';
+    if (place.address_components) {
+      address = [
+        (place.address_components[0] && place.address_components[0].short_name || ''),
+        (place.address_components[1] && place.address_components[1].short_name || ''),
+        (place.address_components[2] && place.address_components[2].short_name || '')
+      ].join(' ');
+    }
+
+    infowindow.setContent('<div><strong>' + latLng +'</strong><br>' + address);
+    infowindow.open(map, marker);
+
+    x.innerHTML = latLng; 
+  });
+
+  map.addListener('click', function(e) {
+    infowindow.close();
+    marker.setVisible(false);
+    var latLng = e.latLng
+      marker.setPosition(latLng);
+      marker.setVisible(true);
+
+      infowindow.setContent('<div><strong>' + latLng +'</strong><br>');
+      infowindow.open(map, marker);
+
+      x.innerHTML = latLng; 
+    map.panTo(latLng);
+  });
+
+
+  $( "#myLocation" ).on( "click", function(){
+    var myLatLng = null;
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          infowindow.close();
+          marker.setVisible(false);
+          marker.setPosition(latLng);
+          marker.setVisible(true);
+          infowindow.setContent('<div><strong>' + latLng +'</strong><br>');
+          infowindow.open(map, marker);
+          x.innerHTML = latLng; 
+          map.panTo(latLng);
+          });
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  });
+}
+</script> 
+
