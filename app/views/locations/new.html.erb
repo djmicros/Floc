@@ -12,18 +12,18 @@
       <%= f.label :desc %>
       <%= f.text_area :desc %>
 
-      <%= f.label :geo %>
-      <%= f.text_field :geo %>
+      <%= f.label :geolocation %>
+      <%= f.hidden_field :geo %>
+      <%= f.hidden_field :latitude %>
+      <%= f.hidden_field :longitude %>
 
-    <input id="pac-input" class="controls" type="text"
-
-        placeholder="Enter address">
-
-      <div id="myLocation" class="btn btn-small btn-info">Find my location</div>
-
+    <input id="address-input" type="text" placeholder="Enter location address"></input>
+<strong>OR</strong>
+      <div id="myLocation" class="btn btn-small btn-info">Find your current location</div>
+<strong>OR</strong> Simply click anywhere on a map ;).
       <p id="demo"></p>
 
-      <div id="map" style="width: 600px; height: 400px"></div> 
+      <div id="map" style="width: 100%; height: 300px"></div> 
 	  
       <%= f.label :tag_list, "Tags (separated by commas)" %>
       <%= f.text_field :tag_list %>
@@ -61,7 +61,7 @@
     changeInput: true,
     showThumbs: true,
     addMore: true
-});      
+});   
   });
 </script>
 
@@ -73,20 +73,26 @@
   var map = null;
   var marker = null;
   var x = document.getElementById("demo");
+  var geo_field = document.getElementById("location_geo");
+  var lat_field = document.getElementById("location_latitude");
+  var lng_field = document.getElementById("location_longitude");
+
+
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 50.0646, lng: 19.9449},
     zoom: 5
   });
   var input = /** @type {!HTMLInputElement} */(
-      document.getElementById('pac-input'));
+      document.getElementById('address-input'));
 
   var types = document.getElementById('type-selector');
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
 
   var autocomplete = new google.maps.places.Autocomplete(input);
   autocomplete.bindTo('bounds', map);
+
+  var geocoder = new google.maps.Geocoder;
 
   var infowindow = new google.maps.InfoWindow();
   var marker = new google.maps.Marker({
@@ -119,7 +125,19 @@ function initMap() {
     infowindow.setContent('<div><strong>' + latLng +'</strong><br>' + address);
     infowindow.open(map, marker);
 
-    x.innerHTML = latLng; 
+    x.innerHTML = latLng;
+    lat_field.value = latLng.toString().slice(1, -1).split(",")[0];
+    lng_field.value = latLng.toString().slice(1, -1).split(",")[1];
+              geo_field.value = geocoder.geocode( {location:latLng}, function(results, status) 
+            {
+              if (status == google.maps.GeocoderStatus.OK) 
+              {
+                geo_field.value = results[0].formatted_address;
+                x.innerHTML = results[0].formatted_address;
+              } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+             }
+            }); 
   });
 
   map.addListener('click', function(e) {
@@ -132,7 +150,19 @@ function initMap() {
       infowindow.setContent('<div><strong>' + latLng +'</strong><br>');
       infowindow.open(map, marker);
 
-      x.innerHTML = latLng; 
+      x.innerHTML = latLng;
+      lat_field.value = latLng.toString().slice(1, -1).split(",")[0];
+      lng_field.value = latLng.toString().slice(1, -1).split(",")[1];
+                geo_field.value = geocoder.geocode( {location:latLng}, function(results, status) 
+            {
+              if (status == google.maps.GeocoderStatus.OK) 
+              {
+                geo_field.value = results[0].formatted_address;
+                x.innerHTML = results[0].formatted_address;
+              } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+             }
+            });
     map.panTo(latLng);
   });
 
@@ -148,13 +178,27 @@ function initMap() {
           marker.setVisible(true);
           infowindow.setContent('<div><strong>' + latLng +'</strong><br>');
           infowindow.open(map, marker);
-          x.innerHTML = latLng; 
+          x.innerHTML = latLng;
+          lat_field.value = latLng.toString().slice(1, -1).split(",")[0];
+          lng_field.value = latLng.toString().slice(1, -1).split(",")[1];
           map.panTo(latLng);
-          });
-    } else { 
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
+
+          geo_field.value = geocoder.geocode( {location:latLng}, function(results, status) 
+            {
+              if (status == google.maps.GeocoderStatus.OK) 
+              {
+                geo_field.value = results[0].formatted_address;
+                x.innerHTML = results[0].formatted_address;
+              } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+             }
+            });
+                    });
+              } else { 
+                  x.innerHTML = "Geolocation is not supported by this browser.";
+              }
   });
 }
+
 </script> 
 

@@ -3,12 +3,12 @@ class Location < ActiveRecord::Base
   #has_attached_file :photo #, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
   has_many :photos, :dependent => :destroy
 
-  geocoded_by :geo
-  after_validation :geocode, :if => :geo_changed?
+  #geocoded_by :geo
+  #after_validation :geocode, :if => :geo_changed?
   #reverse_geocoded_by :latitude, :longitude, :geo => :location
   #after_validation :reverse_geocode
 
-  attr_accessible :desc, :electricity, :geo, :name, :open, :public, :tag_list
+  attr_accessible :desc, :electricity, :geo, :name, :open, :public, :tag_list, :latitude, :longitude
 
   acts_as_taggable
   
