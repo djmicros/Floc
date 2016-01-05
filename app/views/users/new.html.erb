@@ -24,6 +24,16 @@
   </div>
 </div>
 
+
+<a class="btn btn-block btn-social btn-twitter">
+    <span class="fa fa-facebook"></span> Sign in with Twitter
+  </a>
+
+
+
+    <%= link_to "Log in with Facebook", "/auth/facebook", class: "btn btn-block btn-social btn-facebook" %>
+
+
 <div id="user_nav">
   <% if current_user %>
     Signed in as <strong><%= current_user.name %></strong>!

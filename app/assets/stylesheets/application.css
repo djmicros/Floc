@@ -13,6 +13,11 @@
  *= require jquery.lightbox
  *= require jquery.filer
  *= require jquery-filer
- *= require_tree .
+ *= require font-awesome.min
+ *= require bootstrap-social
+ *= require custom
+ *= require sessions
+ *= require static_pages
+ *= require users
  */
 

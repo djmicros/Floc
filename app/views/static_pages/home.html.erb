@@ -1,4 +1,5 @@
-<div class="center hero-unit hero-bg">
+<section class="hero-img">
+<div class="center hero-unit hero-bg home-hero">
 <div class="hero-title">
   <h1>Welcome to the Tracknwin!</h1>
 </br>
@@ -7,9 +8,26 @@
     Track, store and analyze your bike rides, find friends and win prizes!
   </h3>
 </br>
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
-  </br>
-    </br>
-  <p class="small">Already registered? <%= link_to "Sign in!", signin_path%></p>
+
+  <div class="span6 offset3 hero-login">
+    <%= form_for(:session, url: sessions_path) do |f| %>
+
+      <%= f.text_field :email %>
+
+      <%= f.password_field :password %>
+
+      <%= button_tag(type: 'submit', class: "btn btn-block btn-social btn-reddit") do %>
+      	<span class="fa fa-map-marker"></span> Log in with Email
+      <% end %>
+
+    <% end %>
+</br>
+    <%= link_to "/auth/facebook", class: "btn btn-block btn-social btn-facebook" do %>
+    	<span class="fa fa-facebook"></span> Log in with Facebook
+    <% end %>
+
+    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    </div>
 </div>
 </div>
+</section>

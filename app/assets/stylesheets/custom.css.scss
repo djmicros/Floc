@@ -317,3 +317,46 @@ input {
   -webkit-border-radius: 40px;
   -moz-border-radius: 40px;
 }
+
+
+.hero-img {
+  background-size: cover;
+  height: 100vh; }
+
+  .hero-img:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url("/images/hero_bg.jpg");
+    background-size: cover;
+    opacity: .9; }
+
+.home-hero {
+  background-image: linear-gradient(to bottom right, #1b1b1b, #1b1b1b);
+  opacity: .8;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  color: white;
+  margin-top: 30px;
+  text-align: center
+}
+
+.hero-login{
+  width:25%;
+  display: inline-block;
+}
+
+.hero-fb-login {
+  width: 100%;
+}
+
+.hero-fb-login img {
+  width: 100%;
+  opacity: 100%;
+}
+
+ 
