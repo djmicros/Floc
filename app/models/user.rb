@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation, :country, :webpage
+  attr_accessible :name, :email, :password, :password_confirmation, :country, :webpage, :provider, :fb_id, :avatar, :oauth_token, :oauth_expires_at
   has_secure_password
   has_many :locations, dependent: :destroy
 
@@ -11,11 +11,37 @@ class User < ActiveRecord::Base
   validates :email, presence:   true,
                     format:     { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 6 }
-  validates :password_confirmation, presence: true
-  validates_confirmation_of :password
-  validates :country, presence: true
+  validates :password, presence: true, length: { minimum: 6 }, :if => :provider_not_fb?
+  validates :password_confirmation, presence: true, :if => :provider_not_fb?
+  validates_confirmation_of :password, :if => :provider_not_fb?
+  validates :country, presence: true, :if => :provider_not_fb?
   
+
+  def provider_not_fb?
+      provider != "facebook"
+  end
+
+  def self.from_omniauth(auth)
+    where(auth.slice(:provider, :fb_id)).first_or_initialize.tap do |user|
+      user.provider = auth.provider
+      user.fb_id = auth.uid
+      user.name = auth.info.name
+      user.email = auth.info.email
+      user.avatar = auth.info.image
+      user.webpage = auth.info.urls
+      user.country = auth.info.location
+      user.oauth_token = auth.credentials.token
+      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+
+      if user.password_digest == nil 
+      user.password_digest = "facebook"
+      end 
+      
+      user.save!
+    end
+  end
+
+
   private
 
     def create_remember_token

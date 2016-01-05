@@ -285,3 +285,19 @@ input {
 #address-input:focus {
   border-color: #4d90fe;
 }
+
+.avatar{
+  height: 40px;
+  width: 40px;
+  float: left;
+  margin-right: -10px;
+  z-index: 100;
+}
+
+.avatar img{
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+}

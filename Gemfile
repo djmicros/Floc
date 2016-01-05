@@ -24,6 +24,8 @@ gem 'geocoder'
 
 gem 'gmaps4rails'
 
+gem 'omniauth-facebook'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

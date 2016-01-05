@@ -30,7 +30,9 @@ Floc::Application.routes.draw do
 
   match '/users/:id/locations', to: 'locations#user_locations', as: :user_locations
 
-
+  match 'auth/:provider/callback', to: 'sessions#create_fb'
+  match 'auth/failure', to: redirect('/')
+  match 'signout', to: 'sessions#destroy', as: 'signout'
 
 
   # The priority is based upon order of creation:

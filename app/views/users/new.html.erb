@@ -1,4 +1,5 @@
 <% provide(:title, 'Sign up') %>
+
 <h1>Sign up</h1>
 
 <div class="row">
@@ -21,4 +22,13 @@
       <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
+</div>
+
+<div id="user_nav">
+  <% if current_user %>
+    Signed in as <strong><%= current_user.name %></strong>!
+    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+  <% else %>
+    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+  <% end %>
 </div>
