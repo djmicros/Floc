@@ -291,6 +291,7 @@ input {
   width: 40px;
   float: left;
   margin-right: -10px;
+  margin-top: 5px;
   z-index: 100;
 }
 
@@ -300,4 +301,19 @@ input {
   border-radius: 20px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
+}
+
+.big_avatar{
+  height: 80px;
+  width: 80px;
+  z-index: 100;
+  float: left;
+}
+
+.big_avatar img{
+  height: 80px;
+  width: 80px;
+  border-radius: 40px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
 }

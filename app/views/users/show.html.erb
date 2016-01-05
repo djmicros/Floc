@@ -3,7 +3,15 @@
   <aside class="span4">
     <section>
       <h1>
-        <%= gravatar_for @user %>
+        <% if @user.avatar == nil %>
+          <div class="big_avatar">
+            <%= image_tag("/images/user.jpg") %>
+          </div>   
+        <% else %>
+          <div class="big_avatar">
+            <%= image_tag(@user.avatar) %>
+          </div>
+        <% end %>
         <%= @user.name %>
 	  </h1>
 	</section>
