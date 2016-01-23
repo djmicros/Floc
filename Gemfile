@@ -26,11 +26,12 @@ gem 'gmaps4rails'
 
 gem 'omniauth-facebook'
 
+gem 'pg'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+
 
 gem 'rails-erd'
 gem 'ruby-graphviz'
@@ -66,6 +67,3 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
-group :production do
-  gem 'pg', '0.12.2'
-end
