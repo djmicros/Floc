@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'rails', '3.2.12'
 
@@ -34,6 +34,8 @@ gem 'sqlite3'
 
 gem 'rails-erd'
 gem 'ruby-graphviz'
+
+gem 'coffee-script-source', '1.8.0'
 
 # Gems used only for assets and not required
 # in production environments by default.

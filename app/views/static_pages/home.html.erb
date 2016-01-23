@@ -1,11 +1,11 @@
 <section class="hero-img">
 <div class="center hero-unit hero-bg home-hero">
 <div class="hero-title">
-  <h1>Welcome to the Tracknwin!</h1>
+  <h1>Welcome to the Floc!</h1>
 </br>
 </br>
   <h3>
-    Track, store and analyze your bike rides, find friends and win prizes!
+    Store, share and find your amazing Film Locations!
   </h3>
 </br>
 
@@ -25,8 +25,11 @@
     <%= link_to "/auth/facebook", class: "btn btn-block btn-social btn-facebook" do %>
     	<span class="fa fa-facebook"></span> Log in with Facebook
     <% end %>
-
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+</br>
+    <%= link_to signup_path, class: "btn btn-block btn-social btn-google" do %>
+    	<span class="fa fa-user-plus"></span> New user? Sign up now!
+    <% end %>
+</br>
     </div>
 </div>
 </div>

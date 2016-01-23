@@ -10,7 +10,7 @@ GIT
       mimemagic (= 0.3.0)
 
 GEM
-  remote: https://rubygems.org/
+  remote: http://rubygems.org/
   specs:
     actionmailer (3.2.12)
       actionpack (= 3.2.12)
@@ -59,7 +59,7 @@ GEM
     coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.9.1.1)
+    coffee-script-source (1.8.0)
     countries (0.11.5)
       currencies (~> 0.4.2)
       i18n_data (~> 0.7.0)
@@ -179,6 +179,7 @@ DEPENDENCIES
   bootstrap-sass (= 2.1)
   bootstrap-will_paginate (= 0.0.6)
   coffee-rails (~> 3.2.1)
+  coffee-script-source (= 1.8.0)
   country_select
   faker (= 1.0.1)
   geocoder

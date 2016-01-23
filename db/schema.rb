@@ -21,12 +21,8 @@ ActiveRecord::Schema.define(:version => 20160105125602) do
     t.boolean  "open"
     t.boolean  "public"
     t.integer  "user_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.float    "latitude"
     t.float    "longitude"
   end
