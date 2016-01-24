@@ -10,13 +10,13 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
 //= require bootstrap
-//= require jquery.min
+//= require jquery
 //= require jquery_ujs
 //= require jquery.lightbox.min
 //= require jquery.filer
 //= require underscore
 //= require gmaps/google
-//= require_tree .
+
+
 

@@ -9,7 +9,6 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require bootstrap.min
  *= require jquery.lightbox
  *= require jquery.filer
  *= require jquery-filer
@@ -19,5 +18,6 @@
  *= require sessions
  *= require static_pages
  *= require users
+ *= require bootstrap
  */
 
