@@ -20,6 +20,33 @@ class SessionsController < ApplicationController
     sign_in user
     redirect_back_or user
   end
+  
+  def app_create
+	if request.post?
+	username = params[:username]
+	password = params[:password]
+		if User.find_by_email(username) != nil
+			user = User.find_by_email(username)
+				if user.authenticate(password)
+					sign_in user
+					response = user.name+" "+user.email+" "+user.remember_token
+
+					#response[0] = user.name
+					#response[1] = user.remember_token
+					jsonresponse = response.to_json
+					#jsonresponse = 
+					render :inline => jsonresponse
+				else
+					render :inline => "false"
+				end
+		else
+			render :inline => "false nie ma usera" + username.to_s
+		end
+	else
+	redirect_to signin_url, notice: "There is no place for you ;)"
+	end
+	#render :nothing => true, :status => 500
+  end
 
   def destroy
     sign_out
