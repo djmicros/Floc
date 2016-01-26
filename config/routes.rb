@@ -37,6 +37,7 @@ Floc::Application.routes.draw do
   # Mobile app settings
   
   match 'app_signin', to: 'sessions#app_create'
+  match 'token_signin', to: 'sessions#token_create'
 
 
   # The priority is based upon order of creation:
