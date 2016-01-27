@@ -25,6 +25,31 @@ class UsersController < ApplicationController
     end
   end
   
+  def app_create
+	if request.post?
+		@user = User.new(params[:user])
+		@user.name = params[:name]
+		@user.country = params[:country]
+		@user.email = params[:email]
+		@user.webpage = params[:webpage]
+		@user.password = params[:password]
+		@user.password_confirmation = params[:password_confirmation]
+		if @user.save
+					response = @user.name+" "+@user.email+" "+@user.remember_token
+					jsonresponse = response.to_json
+					render :inline => jsonresponse
+		else
+		errors = "Errors: "
+		@user.errors.full_messages.each do |msg| 
+		errors = errors + msg + ", "
+		end
+		render :inline => errors
+		end
+	else
+		redirect_to signin_url, notice: "There is no place for you ;)"
+	end
+  end
+	
   def edit
     @user = User.find(params[:id])
   end
