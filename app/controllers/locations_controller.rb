@@ -35,6 +35,7 @@ before_filter :correct_user,   only: [:edit, :update]
     end
   end
   
+  
   def create
     @location = Location.new(params[:location])
 	@location.user = current_user
@@ -51,6 +52,46 @@ before_filter :correct_user,   only: [:edit, :update]
       render 'new'
     end
   end
+  
+  
+  def app_create
+	if request.post?
+		username = params[:username]
+		token = params[:token]
+			if User.find_by_email(username) != nil
+				user = User.find_by_email(username)
+					if user.remember_token == token
+						@location = Location.new(params[:location])
+						@location.user_id = user.id
+						@location.name = params[:name]
+						@location.desc = params[:desc]
+						@location.geo = params[:geo]
+						#@location.tags = params[:tags]
+						@location.electricity = params[:electricity]
+						@location.open = params[:open]
+						@location.public = params[:public]
+						if @location.save
+							response = "Location saved!"
+							jsonresponse = response.to_json
+							render :inline => jsonresponse
+						else
+							errors = "Errors: "
+							@location.errors.full_messages.each do |msg| 
+							errors = errors + msg + ", "
+							render :inline => errors
+							end
+						end
+					else
+						render :inline => "wrong token"
+					end
+			else 
+				render :inline => "wrong user"
+			end
+	else
+		redirect_to signin_url, notice: "There is no place for you ;)"
+	end
+  end
+  
   
   def edit
     @location = Location.find(params[:id])

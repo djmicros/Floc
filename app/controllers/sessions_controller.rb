@@ -30,11 +30,7 @@ class SessionsController < ApplicationController
 				if user.authenticate(password)
 					sign_in user
 					response = user.name+" "+user.email+" "+user.remember_token
-
-					#response[0] = user.name
-					#response[1] = user.remember_token
 					jsonresponse = response.to_json
-					#jsonresponse = 
 					render :inline => jsonresponse
 				else
 					render :inline => "false"
