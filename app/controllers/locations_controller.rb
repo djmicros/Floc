@@ -73,7 +73,40 @@ before_filter :correct_user,   only: [:edit, :update]
 						@location.latitude = params[:latitude]
 						@location.longitude = params[:longitude]
 						if @location.save
-							response = "Location saved!"
+							if params[:image1] != ""
+									data = StringIO.new(Base64.decode64(params[:image1]))
+									data.class.class_eval { attr_accessor :original_filename, :content_type }
+									data.original_filename = "image1.jpg"
+									data.content_type = "image/jpeg"
+									if @location.photos.create(photo: data)
+									response = "zapisano"
+									else
+									response = "gowno"
+									end
+							end
+							if params[:image2] != ""
+									data = StringIO.new(Base64.decode64(params[:image2]))
+									data.class.class_eval { attr_accessor :original_filename, :content_type }
+									data.original_filename = "image2.jpg"
+									data.content_type = "image/jpeg"
+									if @location.photos.create(photo: data)
+									response = "zapisano"
+									else
+									response = "gowno"
+									end
+							end
+							if params[:image3] != ""
+									data = StringIO.new(Base64.decode64(params[:image3]))
+									data.class.class_eval { attr_accessor :original_filename, :content_type }
+									data.original_filename = "image3.jpg"
+									data.content_type = "image/jpeg"
+									if @location.photos.create(photo: data)
+									response = "zapisano"
+									else
+									response = "gowno"
+									end
+							end
+							response += "Location saved!"
 							jsonresponse = response.to_json
 							render :inline => jsonresponse
 						else
