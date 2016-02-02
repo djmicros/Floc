@@ -73,6 +73,7 @@ before_filter :correct_user,   only: [:edit, :update]
 						@location.latitude = params[:latitude]
 						@location.longitude = params[:longitude]
 						if @location.save
+						response = "po zapisie"
 							if params[:image1] != ""
 									data = StringIO.new(Base64.decode64(params[:image1]))
 									data.class.class_eval { attr_accessor :original_filename, :content_type }
