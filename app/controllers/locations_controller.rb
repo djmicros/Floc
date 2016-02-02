@@ -70,6 +70,8 @@ before_filter :correct_user,   only: [:edit, :update]
 						@location.electricity = params[:electricity]
 						@location.open = params[:open]
 						@location.public = params[:public]
+						@location.latitude = params[:latitude]
+						@location.longitude = params[:longitude]
 						if @location.save
 							response = "Location saved!"
 							jsonresponse = response.to_json
