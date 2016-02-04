@@ -28,6 +28,9 @@ gem 'omniauth-facebook'
 
 gem 'pg'
 
+gem 'aws-sdk'
+
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
