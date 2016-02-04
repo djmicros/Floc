@@ -158,6 +158,30 @@ def app_search
 	end
 end
 
+def app_get_location
+	if request.post?
+		if params[:id].present?
+			@location = Location.find(params[:id])
+			if @location.public == false
+				if @location.user.email == params[:username] && @location.user.remember_token == params[:token]
+					response = @location
+					jsonresponse = response.to_json
+					render :inline => jsonresponse
+				else
+					render :inline => "This is private location"
+				end
+			else
+				response = @location
+				jsonresponse = response.to_json
+				render :inline => jsonresponse			
+			end	
+		else
+			render :inline => "No id parameters specified"
+		end
+	else
+		redirect_to signin_url, notice: "There is no place for you ;)"
+	end
+end
 
 def edit
 	@location = Location.find(params[:id])
