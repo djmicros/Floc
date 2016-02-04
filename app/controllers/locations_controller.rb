@@ -140,7 +140,7 @@ def app_search
 			end
 			@locations.each { |location|
 				if location.photos.any?
-					location[:photo] = request.base_url + location.photos.first.photo.url 
+					location[:photo] = location.photos.first.photo.url 
 				end
 			}
 			if @locations.any?
