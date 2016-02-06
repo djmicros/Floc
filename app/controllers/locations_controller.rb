@@ -171,6 +171,12 @@ def app_get_location
 					render :inline => "This is private location"
 				end
 			else
+				if @location.photos.any?
+					@location[:images] = []
+					@location.photos.each { |photo|
+					@location[:images].push photo.photo.url
+					}
+				end
 				response = @location
 				jsonresponse = response.to_json
 				render :inline => jsonresponse			
