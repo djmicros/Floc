@@ -50,6 +50,38 @@ class UsersController < ApplicationController
 	end
   end
 	
+  def app_get_user_locations
+	if request.post?
+		username = params[:username]
+		token = params[:token]
+		if User.find_by_email(username) != nil
+			user = User.find_by_email(username)
+			if user.remember_token == token
+				locations = user.locations
+				locations.each { |location|
+				if location.photos.any?
+					location[:photo] = location.photos.first.photo.url 
+				end
+			}
+			if locations.any?
+				response = locations
+				jsonresponse = response.to_json
+				render :inline => jsonresponse
+			else 
+				render :inline => "Unfortunately, no locations found"
+			end
+			else
+				render :inline => "wrong token"
+			end
+		else 
+			render :inline => "wrong user"
+		end
+	else
+		redirect_to signin_url, notice: "There is no place for you ;)"
+	end
+  end
+  
+  
   def edit
     @user = User.find(params[:id])
   end

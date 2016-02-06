@@ -42,6 +42,7 @@ Floc::Application.routes.draw do
   match 'app_add_location', to: 'locations#app_create'
   match 'app_search', to: 'locations#app_search'
   match 'app_get_location', to: 'locations#app_get_location'
+  match 'app_get_user_locations', to: 'users#app_get_user_locations'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
