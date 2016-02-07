@@ -81,6 +81,26 @@ class UsersController < ApplicationController
 	end
   end
   
+def app_get_user
+	if request.post?
+		username = params[:username]
+		token = params[:token]
+		if User.find_by_email(username) != nil
+			user = User.find_by_email(username)
+			if user.remember_token == token
+				jsonresponse = user.to_json
+				render :inline => jsonresponse
+			else
+				render :inline => "wrong token"
+			end
+		else 
+			render :inline => "wrong user"
+		end
+	else
+		redirect_to signin_url, notice: "There is no place for you ;)"
+	end
+  end
+  
   
   def edit
     @user = User.find(params[:id])
