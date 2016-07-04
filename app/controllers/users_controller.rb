@@ -88,6 +88,8 @@ def app_get_user
 		if User.find_by_email(username) != nil
 			user = User.find_by_email(username)
 			if user.remember_token == token
+				country_name = ISO3166::Country.new(user.country)
+				user.country = country_name
 				jsonresponse = user.to_json
 				render :inline => jsonresponse
 			else
