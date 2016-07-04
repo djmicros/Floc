@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails'
 
 gem 'bootstrap-sass', '2.1'
 
@@ -18,7 +18,7 @@ gem 'acts-as-taggable-on'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
 
-gem 'paperclip', github: 'thoughtbot/paperclip'
+gem "paperclip"
 
 gem 'geocoder'
 
