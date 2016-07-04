@@ -36,7 +36,7 @@ class SessionsController < ApplicationController
 					render :inline => "false"
 				end
 		else
-			render :inline => "false"
+			render :inline => "falsssse"
 		end
 	else
 	redirect_to signin_url, notice: "There is no place for you ;)"
