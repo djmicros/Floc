@@ -16,6 +16,8 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
+	country = ISO3166::Country.new(@user.country)
+	@user.country = country.name
     if @user.save
       sign_in @user
       flash[:success] = "Welcome to the Sample App!"
@@ -88,8 +90,6 @@ def app_get_user
 		if User.find_by_email(username) != nil
 			user = User.find_by_email(username)
 			if user.remember_token == token
-				country = ISO3166::Country.new(user.country)
-				user.country = country.name
 				jsonresponse = user.to_json
 				render :inline => jsonresponse
 			else
