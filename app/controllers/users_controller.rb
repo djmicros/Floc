@@ -114,7 +114,9 @@ def app_update_user
 			if user.remember_token == token
 				if user.authenticate(password)
 					if user.update_attributes(:name => params[:name], :country => params[:country], :webpage => params[:webpage], :password => params[:password], :password_confirmation => params[:password], :email => params[:username])
-					  render :inline => user.remember_token
+						response = @user.name+" "+@user.email+" "+@user.remember_token
+						jsonresponse = response.to_json
+						render :inline => jsonresponse
 					else
 					  render :inline => "fail updatu"
 					end
