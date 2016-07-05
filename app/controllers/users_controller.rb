@@ -113,15 +113,25 @@ def app_update_user
 			user = User.find_by_email(username)
 			if user.remember_token == token
 				if user.authenticate(password)
-					if user.update_attributes(:name => params[:name], :country => params[:country], :webpage => params[:webpage], :password => params[:password], :password_confirmation => params[:password], :email => params[:username])
-						response = user.name+" "+user.email+" "+user.remember_token
-						jsonresponse = response.to_json
-						render :inline => jsonresponse
+					if params.has_key?(:new_password) && params.has_key?(:new_password_confirmation)
+						if user.update_attributes(:name => params[:name], :country => params[:country], :webpage => params[:webpage], :password => params[:new_password], :password_confirmation => params[:new_password_confirmation], :email => params[:username])
+							response = user.name+" "+user.email+" "+user.remember_token
+							jsonresponse = response.to_json
+							render :inline => jsonresponse
+						else
+						  render :inline => "password update fail"
+						end
 					else
-					  render :inline => "fail updatu"
+						if user.update_attributes(:name => params[:name], :country => params[:country], :webpage => params[:webpage], :password => params[:password], :password_confirmation => params[:password], :email => params[:username])
+							response = user.name+" "+user.email+" "+user.remember_token
+							jsonresponse = response.to_json
+							render :inline => jsonresponse
+						else
+						  render :inline => "update fail"
+						end
 					end
 				else
-					render :inline => "fail logowania haslem"
+					render :inline => "authentication fail"
 				end	
 			else
 				render :inline => "wrong token"
