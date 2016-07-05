@@ -28,7 +28,7 @@ gem 'omniauth-facebook'
 
 gem 'pg'
 
-gem 'aws-sdk'
+gem 'aws-sdk', '< 2.0'
 
 
 # Bundle edge Rails instead:

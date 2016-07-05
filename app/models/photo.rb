@@ -4,9 +4,9 @@ class Photo < ActiveRecord::Base
 
   attr_accessible :photo
   
-  has_attached_file :photo
-#    :path => ":rails_root/public/images/:id/:filename", 
-#    :url  => "/images/:id/:filename"
+  has_attached_file :photo,
+    :path => ":rails_root/public/images/:id/:filename", 
+    :url  => "/images/:id/:filename"
 	
 
   #do_not_validate_attachment_file_type :photo
