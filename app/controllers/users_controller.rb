@@ -119,7 +119,7 @@ def app_update_user
 							jsonresponse = response.to_json
 							render :inline => jsonresponse
 						else
-						  render :inline => "password update fail"
+						  render :inline => "Error password update fail!"
 						end
 					else
 						if user.update_attributes(:name => params[:name], :country => params[:country], :webpage => params[:webpage], :password => params[:password], :password_confirmation => params[:password], :email => params[:username])
@@ -127,17 +127,17 @@ def app_update_user
 							jsonresponse = response.to_json
 							render :inline => jsonresponse
 						else
-						  render :inline => "update fail"
+						  render :inline => "Error - update fail!"
 						end
 					end
 				else
-					render :inline => "authentication fail"
+					render :inline => "Error - authentication failed!"
 				end	
 			else
-				render :inline => "wrong token"
+				render :inline => "Error - wrong token!"
 			end
 		else 
-			render :inline => "wrong user"
+			render :inline => "Error - wrong user!"
 		end
 	else
 		redirect_to signin_url, notice: "There is no place for you ;)"
