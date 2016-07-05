@@ -103,6 +103,36 @@ def app_get_user
 	end
   end
   
+
+def app_update_user
+	if request.post?
+		username = params[:username]
+		token = params[:token]
+		password = params[:password]
+		if User.find_by_email(username) != nil
+			user = User.find_by_email(username)
+			if user.remember_token == token
+				if user.authenticate(password)
+					if user.update_attributes(:name => params[:name], :country => params[:country], :webpage => params[:webpage], :password => params[:password], :password_confirmation => params[:password], :email => params[:username])
+					  render :inline => user.remember_token
+					else
+					  render :inline => "fail updatu"
+					end
+				else
+					render :inline => "fail logowania haslem"
+				end	
+			else
+				render :inline => "wrong token"
+			end
+		else 
+			render :inline => "wrong user"
+		end
+	else
+		redirect_to signin_url, notice: "There is no place for you ;)"
+	end
+  end
+  
+  
   
   def edit
     @user = User.find(params[:id])
