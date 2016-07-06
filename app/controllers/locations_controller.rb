@@ -27,7 +27,7 @@ def show
 		marker.lat location.latitude
 		marker.lng location.longitude
 		marker.picture({
-		"url" => "/images/map_pin.png",
+		"url" => "https://s3.amazonaws.com/floc-floc/app/public/images/map_pin.png",
 		"width" =>  40,
 		"height" => 55})
 		marker.infowindow location.geo + ".  " + location.desc
