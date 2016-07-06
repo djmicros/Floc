@@ -34,7 +34,7 @@ Floc::Application.routes.draw do
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
   
-  # Mobile app settings
+  # Mobile app routes
   
   match 'app_signin', to: 'sessions#app_create'
   match 'token_signin', to: 'sessions#token_create'
@@ -45,6 +45,7 @@ Floc::Application.routes.draw do
   match 'app_get_user_locations', to: 'users#app_get_user_locations'
   match 'app_get_user', to: 'users#app_get_user'
   match 'app_update_user', to: 'users#app_update_user'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

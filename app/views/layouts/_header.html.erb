@@ -1,6 +1,10 @@
 <nav class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
-      <%= link_to (image_tag("logo.png")), root_path, id: "logo" %>
+	<% if signed_in? %>
+		<%= link_to (image_tag("logo.png")), @current_user, id: "logo" %>
+	<% else %>
+		<%= link_to (image_tag("logo.png")), root_path, id: "logo" %>
+	<% end %>
         <ul class="nav pull-left navbar-nav">
           <% if signed_in? %>
 		    <li id="fat-menu" class="dropdown">
