@@ -317,7 +317,8 @@ input {
 
 .hero-img {
   background-size: cover;
-  height: 100vh; }
+  height: 100vh;
+max-height: 600px;  }
 
   .hero-img:before {
     content: '';
@@ -328,7 +329,8 @@ input {
     left: 0;
     background-image: url("/images/hero_bg.jpg");
     background-size: cover;
-    opacity: .9; }
+    opacity: 1; 
+}
 
 .home-hero {
   background-image: linear-gradient(to bottom right, #1b1b1b, #1b1b1b);
@@ -338,7 +340,7 @@ input {
   -moz-border-radius: 20px;
   color: white;
   margin-top: 30px;
-  text-align: center
+  text-align: center;
 }
 
 .hero-login{
@@ -359,6 +361,11 @@ input {
 div.hero-title {
 padding-top: 15px;
 padding-bottom: 25px;
+}
+
+
+.section {
+max-height:505px;
 }
 
 #user-nav-dropdown.dropdown-toggle {
