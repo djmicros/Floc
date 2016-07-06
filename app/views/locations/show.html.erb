@@ -1,5 +1,6 @@
 <% provide(:title, @location.name) %>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAj1VhTA5l4MKf9AloiQ81JkHvjXMedSI4&signed_in=false&libraries=places"text/javascript"></script>
+<script src="https://s3.amazonaws.com/floc-floc/app/public/images/markerclusterer.js"text/javascript"></script>
 
 <div class="container">
 		            	<h1>"<%= @location.name %>" by <%= link_to(@location.user.name, @location.user) %> </h1>
