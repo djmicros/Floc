@@ -17,6 +17,7 @@
 //= require jquery.filer
 //= require underscore
 //= require gmaps/google
+//= require markerclusterer
 
 
 
