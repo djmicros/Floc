@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 	@user.country = country.name
     if @user.save
       sign_in @user
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "Welcome to the Floc!"
       redirect_to @user
     else
       render 'new'
