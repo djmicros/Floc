@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :fb_id)).first_or_initialize.tap do |user|
       user = User.new
-	  user.id = auth.uid
+	  user.id = User.last.id + 1
       user.provider = auth.provider
       user.fb_id = auth.uid
       user.name = auth.info.name
