@@ -50,9 +50,7 @@ class User < ActiveRecord::Base
 		end
 	else
 		user = User.find_by_email(auth.info.email)
-		session[:user_id] = user.id
-		sign_in user
-		redirect_back_or user
+
 	end
 
 	  
