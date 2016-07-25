@@ -37,7 +37,10 @@ class User < ActiveRecord::Base
       user.password_digest = "facebook"
       end 
       
+	  if User.find_by_email(auth.info.email) != nil
       user.save!
+	  end
+	  
     end
   end
 
