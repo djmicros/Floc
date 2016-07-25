@@ -38,8 +38,16 @@ class User < ActiveRecord::Base
       user.password_digest = "facebook"
       end 
       
+	@user = User.new(user)
 
-      user.save!
+    if @user.save
+      sign_in @user
+      flash[:success] = "Welcome to the Floc!"
+      redirect_to @user
+    else
+      render 'new'
+    end
+
 
 	  
     end
