@@ -42,12 +42,11 @@ class User < ActiveRecord::Base
       end 
 
 		if user.save
-		  flash[:success] = "Welcome to the Floc!"
+		  user = User.find_by_email(auth.info.email)
 		else
 		  redirect_to sign_in
 		end
-	else
-		user = User.find_by_email(auth.info.email)
+
 
 	end
 
