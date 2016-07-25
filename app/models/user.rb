@@ -24,23 +24,23 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
 	
 	if User.find_by_email(auth.info.email) == nil
-      user = User.new
-	  user.id = User.last.id + 1
-      user.provider = auth.provider
-      user.fb_id = auth.uid
-      user.name = auth.info.name
-      user.email = auth.info.email
-      user.avatar = auth.info.image
-      user.webpage = auth.info.urls
-      user.country = auth.info.location
-      user.oauth_token = auth.credentials.token
-      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      @fb_user = User.new
+	  @fb_user.id = User.last.id + 1
+      @fb_user.provider = auth.provider
+      @fb_user.fb_id = auth.uid
+      @fb_user.name = auth.info.name
+      @fb_user.email = auth.info.email
+      @fb_user.avatar = auth.info.image
+      @fb_user.webpage = auth.info.urls
+      @fb_user.country = auth.info.location
+      @fb_user.oauth_token = auth.credentials.token
+      @fb_user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 
-      if user.password_digest == nil 
-      user.password_digest = "facebook"
+      if @fb_user.password_digest == nil 
+      @fb_user.password_digest = "facebook"
       end 
 
-		if user.save
+		if @fb_user.save
 		  @fb_user = user
 		else
 		  redirect_to sign_in
