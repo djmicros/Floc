@@ -22,7 +22,6 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    where(auth.slice(:provider, :fb_id)).first_or_initialize.tap do |user|
 	
 	if User.find_by_email(auth.info.email) == nil
       user = User.new
@@ -42,16 +41,16 @@ class User < ActiveRecord::Base
       end 
 
 		if user.save
-		  user = User.find_by_email(auth.info.email)
+		  fb_user = User.find_by_email(auth.info.email)
 		else
 		  redirect_to sign_in
 		end
-
-
+	else
+		fb_user = User.find_by_email(auth.info.email)
 	end
 
 	  
-    end
+
   end
 
 
