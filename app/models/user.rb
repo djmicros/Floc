@@ -42,9 +42,7 @@ class User < ActiveRecord::Base
       end 
 
 		if user.save
-		  sign_in user
 		  flash[:success] = "Welcome to the Floc!"
-		  redirect_to user
 		else
 		  redirect_to sign_in
 		end
