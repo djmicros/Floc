@@ -23,7 +23,8 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :fb_id)).first_or_initialize.tap do |user|
-      user.id = auth.uid
+      user = User.new
+	  user.id = auth.uid
       user.provider = auth.provider
       user.fb_id = auth.uid
       user.name = auth.info.name
@@ -37,13 +38,11 @@ class User < ActiveRecord::Base
       if user.password_digest == nil 
       user.password_digest = "facebook"
       end 
-      
-	@user = User.new(user)
 
-    if @user.save
-      sign_in @user
+    if user.save
+      sign_in user
       flash[:success] = "Welcome to the Floc!"
-      redirect_to @user
+      redirect_to user
     else
       render 'new'
     end
