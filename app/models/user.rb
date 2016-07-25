@@ -23,9 +23,7 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :fb_id)).first_or_initialize.tap do |user|
-	  if User.find_by_email(auth.info.email) != nil
       user = User.new
-	  end
       user.provider = auth.provider
       user.fb_id = auth.uid
       user.name = auth.info.name
