@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
       end 
 
 		if user.save
-		  @fb_user = User.find_by_email(auth.info.email)
+		  @fb_user = user
 		else
 		  redirect_to sign_in
 		end
