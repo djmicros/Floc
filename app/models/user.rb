@@ -22,8 +22,7 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-	  user = find_or_create_by(fb_id: auth.uid)
-
+    where(auth.slice(:provider, :fb_id)).first_or_initialize.tap do |user|
       user.provider = auth.provider
       user.fb_id = auth.uid
       user.name = auth.info.name
@@ -33,14 +32,13 @@ class User < ActiveRecord::Base
       user.country = auth.info.location
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-	  user.id = User.last.id + 1
 
       if user.password_digest == nil 
       user.password_digest = "facebook"
       end 
       
       user.save!
-
+    end
   end
 
 
