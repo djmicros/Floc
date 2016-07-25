@@ -22,7 +22,8 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    where(auth.slice(:provider, :fb_id)).first_or_initialize.tap do |user|
+	  user = find_or_create_by(fb_id: auth.uid)
+
       user.provider = auth.provider
       user.fb_id = auth.uid
       user.name = auth.info.name
@@ -39,7 +40,7 @@ class User < ActiveRecord::Base
       end 
       
       user.save!
-    end
+
   end
 
 
