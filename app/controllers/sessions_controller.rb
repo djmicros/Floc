@@ -16,9 +16,8 @@ class SessionsController < ApplicationController
 
   def create_fb
     user = User.from_omniauth(env["omniauth.auth"])
-    session[:user_id] = user.id
-    sign_in user
-    redirect_back_or user
+	sign_in @fb_user
+	redirect_back_or @fb_user
   end
   
   def app_create
